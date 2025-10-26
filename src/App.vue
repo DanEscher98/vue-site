@@ -3,30 +3,33 @@ import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div class="flex min-h-screen flex-col items-center justify-center gap-8">
+    <div class="flex gap-8">
+      <a
+        href="https://vite.dev"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          src="/vite.svg"
+          class="transition-filter h-24 p-6 duration-300 hover:drop-shadow-[0_0_2em_#646cffaa]"
+          alt="Vite logo"
+        />
+      </a>
+
+      <a
+        href="https://vuejs.org/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          src="./assets/vue.svg"
+          class="transition-filter h-24 p-6 duration-300 hover:drop-shadow-[0_0_2em_#42b883aa]"
+          alt="Vue logo"
+        />
+      </a>
+    </div>
+
+    <HelloWorld msg="Vite + Vue" />
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
-
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
