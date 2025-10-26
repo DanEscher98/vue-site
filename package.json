@@ -1,0 +1,24 @@
+{
+  "name": "vue-site",
+  "packageManager": "yarn@4.10.3",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "type-check": "vue-tsc --noEmit"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.1",
+    "@vue/eslint-config-typescript": "^14.6.0",
+    "@vue/tsconfig": "^0.8.1",
+    "eslint": "^9.38.0",
+    "eslint-plugin-vue": "^10.5.1",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.12",
+    "vue-eslint-parser": "^10.2.0",
+    "vue-tsc": "^3.1.2"
+  },
+  "dependencies": {
+    "vue": "^3.5.22"
+  }
+}
