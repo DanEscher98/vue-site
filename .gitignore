@@ -83,6 +83,7 @@ out
 dist
 dist-ssr
 *.local
+dev-dist
 
 
 

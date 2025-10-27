@@ -15,6 +15,9 @@ export default ({ mode }) => {
   const PWA_ICON_SRC = env.VITE_PWA_ICON_SRC || 'pwa-512x512.png'
 
   return defineConfig({
+    build: {
+      outDir: 'dist', // default, but make sure it's explicit
+    },
     resolve: {
       alias: {
         '@': '/src',

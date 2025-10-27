@@ -4,7 +4,7 @@
   "packageManager": "yarn@4.10.3",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --outDir dist",
     "format": "prettier --list-different --write .",
     "type-check": "vue-tsc --noEmit",
     "lint": "eslint . --ext .vue,.ts,.js",
