@@ -1,1 +1,49 @@
 @import 'tailwindcss';
+
+/*
+ * Tailwind v4 Theme Extension
+ *
+ * Defines brand color and font tokens that reference CSS variables.
+ * The actual values are injected at runtime from src/config/brand.ts via useBrand().
+ *
+ * This creates Tailwind utility classes: bg-brand-accent, text-brand-base, font-logo, etc.
+ * Single source of truth: src/config/brand.ts
+ */
+@theme {
+  /* Brand color tokens - values injected by useBrand composable */
+  --color-brand-base: var(--brand-base);
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-contrast: var(--brand-contrast);
+  --color-brand-secondary: var(--brand-secondary);
+  --color-brand-neutral: var(--brand-neutral);
+  --color-brand-background: var(--brand-background);
+
+  /* Font family tokens - values injected by useBrand composable */
+  --font-logo: var(--font-logo), system-ui, sans-serif;
+  --font-headers: var(--font-headers), serif;
+  --font-primary: var(--font-primary), system-ui, sans-serif;
+  --font-secondary: var(--font-secondary), monospace;
+}
+
+/*
+ * Base styles using brand tokens
+ */
+html {
+  font-family: var(--font-primary);
+  color: var(--color-brand-base);
+  background-color: var(--color-brand-background);
+}
+
+/*
+ * Typography defaults
+ */
+h1,
+h2,
+h3 {
+  font-family: var(--font-headers);
+}
+
+code,
+pre {
+  font-family: var(--font-secondary);
+}

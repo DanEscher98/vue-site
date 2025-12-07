@@ -19,10 +19,23 @@ export default defineConfig(({ mode }) => {
       Unfonts({
         google: {
           families: [
-            { name: 'Source Sans Pro' },
-            { name: 'Playfair Display SC' },
-            { name: 'Source Code Pro' },
+            // Default brand fonts
+            { name: 'Source Sans Pro', styles: 'wght@400;600;700' },
+            { name: 'Playfair Display SC', styles: 'wght@400;700' },
+            { name: 'Source Code Pro', styles: 'wght@400;500' },
             { name: 'Bungee' },
+            // Additional brand fonts (for easy switching)
+            { name: 'Inter', styles: 'wght@400;500;600;700' },
+            { name: 'Poppins', styles: 'wght@400;500;600;700' },
+            { name: 'Montserrat', styles: 'wght@400;500;600;700' },
+            { name: 'Orbitron', styles: 'wght@400;700' },
+            { name: 'Abril Fatface' },
+            { name: 'Lato', styles: 'wght@400;700' },
+            { name: 'Raleway', styles: 'wght@400;600;700' },
+            { name: 'Open Sans', styles: 'wght@400;600;700' },
+            { name: 'Roboto', styles: 'wght@400;500;700' },
+            { name: 'JetBrains Mono', styles: 'wght@400;500' },
+            { name: 'Quicksand', styles: 'wght@400;500;600' },
           ],
         },
       }),

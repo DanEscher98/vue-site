@@ -2,6 +2,8 @@
  * Common TypeScript interfaces and types
  */
 
+export type { BrandConfig, BrandPalette, BrandTypography, ThemeMode } from './brand'
+
 export interface User {
   id: string
   name: string

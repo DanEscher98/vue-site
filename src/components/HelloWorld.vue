@@ -15,7 +15,7 @@ const count = ref(0)
     <div class="card">
       <button
         type="button"
-        class="rounded bg-blue-600 px-4 py-2 font-medium text-white transition hover:bg-blue-700"
+        class="rounded bg-brand-accent px-4 py-2 font-medium text-brand-neutral transition hover:brightness-110"
         @click="count++"
       >
         count is {{ count }}
@@ -48,6 +48,6 @@ const count = ref(0)
       >.
     </p>
 
-    <p class="text-gray-500">Click on the Vite and Vue logos to learn more</p>
+    <p class="text-brand-base/50">Click on the Vite and Vue logos to learn more</p>
   </div>
 </template>

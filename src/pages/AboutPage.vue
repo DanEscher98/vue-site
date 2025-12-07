@@ -9,15 +9,15 @@ const router = useRouter()
 <template>
   <DefaultLayout>
     <div class="mx-auto max-w-2xl py-12">
-      <h1 class="mb-6 text-3xl font-bold text-gray-900">About This Template</h1>
+      <h1 class="text-brand-base font-headers mb-6 text-3xl font-bold">About This Template</h1>
 
-      <div class="space-y-4 text-gray-600">
+      <div class="text-brand-base/70 space-y-4">
         <p>
           This is a modern Vue 3 template configured with best practices for building static sites
           and web applications.
         </p>
 
-        <h2 class="pt-4 text-xl font-semibold text-gray-800">Features</h2>
+        <h2 class="text-brand-base font-headers pt-4 text-xl font-semibold">Features</h2>
         <ul class="list-inside list-disc space-y-2">
           <li>Vue 3 with Composition API and TypeScript</li>
           <li>Vite for fast development and builds</li>

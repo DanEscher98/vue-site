@@ -1,5 +1,5 @@
 <script setup lang="ts">
-export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost'
+export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'contrast'
 export type ButtonSize = 'sm' | 'md' | 'lg'
 
 interface Props {
@@ -20,11 +20,18 @@ defineEmits<{
   click: [event: MouseEvent]
 }>()
 
+/**
+ * Variant classes using brand color tokens from @theme
+ * These reference CSS variables set by useBrand composable
+ */
 const variantClasses: Record<ButtonVariant, string> = {
-  primary: 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500',
-  secondary: 'bg-gray-600 text-white hover:bg-gray-700 focus:ring-gray-500',
-  outline: 'border-2 border-blue-600 text-blue-600 hover:bg-blue-50 focus:ring-blue-500',
-  ghost: 'text-gray-600 hover:bg-gray-100 focus:ring-gray-500',
+  primary: 'bg-brand-accent text-brand-neutral hover:brightness-110 focus:ring-brand-accent',
+  secondary:
+    'bg-brand-secondary text-brand-neutral hover:brightness-110 focus:ring-brand-secondary',
+  contrast: 'bg-brand-contrast text-brand-base hover:brightness-110 focus:ring-brand-contrast',
+  outline:
+    'border-2 border-brand-accent text-brand-accent hover:bg-brand-accent/10 focus:ring-brand-accent',
+  ghost: 'text-brand-base hover:bg-brand-base/10 focus:ring-brand-base',
 }
 
 const sizeClasses: Record<ButtonSize, string> = {
@@ -37,7 +44,7 @@ const sizeClasses: Record<ButtonSize, string> = {
 <template>
   <button
     type="button"
-    class="inline-flex items-center justify-center rounded-md font-medium transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+    class="inline-flex cursor-pointer items-center justify-center rounded-md font-medium transition-all focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
     :class="[variantClasses[variant], sizeClasses[size]]"
     :disabled="disabled || loading"
     @click="$emit('click', $event)"
