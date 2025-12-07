@@ -359,9 +359,12 @@ load('/content/about.md')
 ### Size Variants
 
 ```vue
-<BaseMarkdown :content="content" size="sm" />  <!-- Compact -->
-<BaseMarkdown :content="content" size="base" /> <!-- Default -->
-<BaseMarkdown :content="content" size="lg" />  <!-- Article/long-form -->
+<BaseMarkdown :content="content" size="sm" />
+<!-- Compact -->
+<BaseMarkdown :content="content" size="base" />
+<!-- Default -->
+<BaseMarkdown :content="content" size="lg" />
+<!-- Article/long-form -->
 ```
 
 ### Prose Classes (Direct Use)
@@ -377,18 +380,19 @@ You can also use prose classes directly on any container:
 
 ### Available Prose Modifiers
 
-| Class | Description |
-|-------|-------------|
-| `prose` | Base prose styles with brand colors |
-| `prose-sm` | Smaller text (sidebars, footnotes) |
-| `prose-base` | Default size |
-| `prose-lg` | Larger text (articles) |
-| `prose-full` | Remove max-width constraint |
-| `prose-narrow` | Narrower max-width (45ch) |
+| Class          | Description                         |
+| -------------- | ----------------------------------- |
+| `prose`        | Base prose styles with brand colors |
+| `prose-sm`     | Smaller text (sidebars, footnotes)  |
+| `prose-base`   | Default size                        |
+| `prose-lg`     | Larger text (articles)              |
+| `prose-full`   | Remove max-width constraint         |
+| `prose-narrow` | Narrower max-width (45ch)           |
 
 ### Brand Integration
 
 All prose elements use brand tokens:
+
 - Headings: `font-headers`, `color-brand-base`
 - Body: `font-primary`, `color-brand-base`
 - Links: `color-brand-accent`
