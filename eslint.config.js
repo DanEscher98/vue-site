@@ -46,10 +46,7 @@ export default [
 
       // Template formatting
       'vue/html-indent': ['warn', 2, { attribute: 1, baseIndent: 1 }],
-      'vue/max-attributes-per-line': [
-        'warn',
-        { singleline: 3, multiline: { max: 1 } },
-      ],
+      'vue/max-attributes-per-line': ['warn', { singleline: 3, multiline: { max: 1 } }],
       'vue/html-self-closing': [
         'warn',
         {
