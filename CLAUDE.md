@@ -31,14 +31,14 @@ src/
 
 This template uses a minimal but complete 6-color system:
 
-| Color        | Coverage | Role                               | Component Usage                          |
-|--------------|----------|------------------------------------|------------------------------------------|
-| `background` | ~60%     | Page canvas                        | `bg-brand-background`                    |
-| `neutral`    | ~20%     | Cards, elevated surfaces           | `bg-brand-neutral`                       |
-| `base`       | ~15%     | Text, icons, borders               | `text-brand-base`, `border-brand-base/10`|
-| `accent`     | ~3%      | Primary actions, links             | `bg-brand-accent`, `text-brand-accent`   |
-| `secondary`  | ~1%      | Supporting actions, tags           | `bg-brand-secondary`                     |
-| `contrast`   | ~1%      | High-impact CTAs (use sparingly!)  | `bg-brand-contrast`                      |
+| Color        | Coverage | Role                              | Component Usage                           |
+| ------------ | -------- | --------------------------------- | ----------------------------------------- |
+| `background` | ~60%     | Page canvas                       | `bg-brand-background`                     |
+| `neutral`    | ~20%     | Cards, elevated surfaces          | `bg-brand-neutral`                        |
+| `base`       | ~15%     | Text, icons, borders              | `text-brand-base`, `border-brand-base/10` |
+| `accent`     | ~3%      | Primary actions, links            | `bg-brand-accent`, `text-brand-accent`    |
+| `secondary`  | ~1%      | Supporting actions, tags          | `bg-brand-secondary`                      |
+| `contrast`   | ~1%      | High-impact CTAs (use sparingly!) | `bg-brand-contrast`                       |
 
 ### The 60-30-10 Rule
 
@@ -52,22 +52,24 @@ This template uses a minimal but complete 6-color system:
 // src/config/brand.ts - ONLY place to define brand values
 export const brandConfig: BrandConfig = {
   light: {
-    base: '#1a1a2e',      // Dark text on light surfaces
-    accent: '#6366f1',    // Primary brand color
-    contrast: '#22d3ee',  // High-visibility CTAs
+    base: '#1a1a2e', // Dark text on light surfaces
+    accent: '#6366f1', // Primary brand color
+    contrast: '#22d3ee', // High-visibility CTAs
     secondary: '#a855f7', // Supporting accent
-    neutral: '#f8fafc',   // Cards, elevated surfaces
-    background: '#ffffff',// Page canvas
+    neutral: '#f8fafc', // Cards, elevated surfaces
+    background: '#ffffff', // Page canvas
   },
   dark: {
-    base: '#f1f5f9',      // Light text on dark surfaces (INVERTED)
-    accent: '#818cf8',    // Brighter for dark mode
-    contrast: '#22d3ee',  // Same or adjusted
+    base: '#f1f5f9', // Light text on dark surfaces (INVERTED)
+    accent: '#818cf8', // Brighter for dark mode
+    contrast: '#22d3ee', // Same or adjusted
     secondary: '#c084fc', // Brighter for dark mode
-    neutral: '#1e293b',   // Elevated dark surface
-    background: '#0f172a',// Dark page canvas (INVERTED)
+    neutral: '#1e293b', // Elevated dark surface
+    background: '#0f172a', // Dark page canvas (INVERTED)
   },
-  typography: { /* ... */ },
+  typography: {
+    /* ... */
+  },
 }
 ```
 
@@ -129,7 +131,7 @@ export const brandConfig: BrandConfig = {
 <hr class="border-brand-base/20" />
 
 <!-- Emphasized borders -->
-<div class="border-2 border-brand-accent">Focus ring</div>
+<div class="border-brand-accent border-2">Focus ring</div>
 <input class="border-brand-base/30 focus:border-brand-accent" />
 ```
 
@@ -152,12 +154,12 @@ export const brandConfig: BrandConfig = {
 
 ### The 4-Font System
 
-| Font Class      | Role                    | Use For                            |
-|-----------------|-------------------------|------------------------------------|
-| `font-logo`     | Brand identity          | Logo text, hero headlines only     |
-| `font-headers`  | Visual hierarchy        | h1, h2, h3, section titles         |
-| `font-primary`  | Body content            | Paragraphs, buttons, labels        |
-| `font-secondary`| Technical/supporting    | Code, timestamps, captions         |
+| Font Class       | Role                 | Use For                        |
+| ---------------- | -------------------- | ------------------------------ |
+| `font-logo`      | Brand identity       | Logo text, hero headlines only |
+| `font-headers`   | Visual hierarchy     | h1, h2, h3, section titles     |
+| `font-primary`   | Body content         | Paragraphs, buttons, labels    |
+| `font-secondary` | Technical/supporting | Code, timestamps, captions     |
 
 ### Typography Examples
 
@@ -182,7 +184,7 @@ export const brandConfig: BrandConfig = {
 ### Contrast Requirements (WCAG AA)
 
 | Combination              | Minimum Ratio | Check Tool                           |
-|--------------------------|---------------|--------------------------------------|
+| ------------------------ | ------------- | ------------------------------------ |
 | `base` on `background`   | 4.5:1         | webaim.org/resources/contrastchecker |
 | `base` on `neutral`      | 4.5:1         | coolors.co/contrast-checker          |
 | `accent` on `background` | 3:1 (UI)      | Use for buttons, not body text       |
@@ -228,9 +230,7 @@ const { isDark, toggleTheme } = useTheme()
 </script>
 
 <template>
-  <button @click="toggleTheme">
-    {{ isDark ? 'Light' : 'Dark' }} Mode
-  </button>
+  <button @click="toggleTheme">{{ isDark ? 'Light' : 'Dark' }} Mode</button>
 </template>
 ```
 
@@ -263,12 +263,14 @@ Special effects that are NOT brand colors are allowed:
 <div class="ring-2 ring-offset-2">Focus ring</div>
 
 <!-- OK - Structural styles -->
-<div class="rounded-xl p-4 gap-6">Layout</div>
+<div class="gap-6 rounded-xl p-4">Layout</div>
 
 <!-- OK - Special effect colors in scoped styles -->
 <style scoped>
 .neon-glow {
-  box-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00;
+  box-shadow:
+    0 0 20px #00ff00,
+    0 0 40px #00ff00;
 }
 </style>
 ```
@@ -278,11 +280,13 @@ Special effects that are NOT brand colors are allowed:
 ### Creating New Components
 
 1. **Use brand Tailwind classes, not colors**
+
    ```vue
    <button class="bg-brand-accent hover:brightness-110">
    ```
 
 2. **Define variants using brand tokens**
+
    ```ts
    const variants = {
      primary: 'bg-brand-accent text-brand-neutral',
@@ -293,6 +297,7 @@ Special effects that are NOT brand colors are allowed:
    ```
 
 3. **Use opacity modifiers for text hierarchy**
+
    ```vue
    <p class="text-brand-base">Primary text</p>
    <p class="text-brand-base/70">Secondary text</p>
@@ -416,11 +421,11 @@ To rebrand the entire app, edit **only** `src/config/brand.ts`:
 export const brandConfig: BrandConfig = {
   name: 'New Brand',
   light: {
-    accent: '#ff0000',  // All buttons, links now red
+    accent: '#ff0000', // All buttons, links now red
     // ... other colors
   },
   typography: {
-    logo: 'Orbitron',   // All logos now Orbitron
+    logo: 'Orbitron', // All logos now Orbitron
     // ... other fonts
   },
 }

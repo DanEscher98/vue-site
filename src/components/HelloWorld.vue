@@ -15,7 +15,7 @@ const count = ref(0)
     <div class="card">
       <button
         type="button"
-        class="rounded bg-brand-accent px-4 py-2 font-medium text-brand-neutral transition hover:brightness-110"
+        class="bg-brand-accent text-brand-neutral rounded px-4 py-2 font-medium transition hover:brightness-110"
         @click="count++"
       >
         count is {{ count }}
