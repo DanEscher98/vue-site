@@ -10,14 +10,17 @@ src/
 │   └── brand.ts     # Single source of truth for colors/fonts (light + dark)
 ├── components/      # Vue components
 │   └── base/        # Reusable base components
+│       ├── BaseButton.vue    # Buttons with brand variants
+│       └── BaseMarkdown.vue  # Brand-aware markdown renderer
 ├── composables/     # Vue composition utilities
-│   ├── useBrand.ts  # Brand colors/fonts (theme-aware)
-│   └── useTheme.ts  # Light/dark theme management
+│   ├── useBrand.ts    # Brand colors/fonts (theme-aware)
+│   ├── useMarkdown.ts # Load markdown from files/URLs
+│   └── useTheme.ts    # Light/dark theme management
 ├── layouts/         # Layout components
 ├── pages/           # Route pages
 ├── stores/          # Pinia stores
 ├── types/           # TypeScript definitions (see brand.ts for detailed docs)
-└── style.css        # Tailwind @theme (references brand CSS vars)
+└── style.css        # Tailwind @theme + prose styles (brand CSS vars)
 ```
 
 ## Brand System (REQUIRED)
@@ -302,6 +305,91 @@ Special effects that are NOT brand colors are allowed:
    const { palette } = useBrand()
    const chartColor = palette.value.accent
    ```
+
+## Markdown Rendering
+
+The template includes brand-aware markdown rendering for content from databases or `.md` files.
+
+### Basic Usage
+
+```vue
+<script setup>
+import BaseMarkdown from '@/components/base/BaseMarkdown.vue'
+
+const content = `
+# Welcome
+
+This is **bold** and this is *italic*.
+
+- List item 1
+- List item 2
+`
+</script>
+
+<template>
+  <BaseMarkdown :content="content" />
+</template>
+```
+
+### Loading from Files
+
+```vue
+<script setup>
+import { useMarkdown } from '@/composables'
+import BaseMarkdown from '@/components/base/BaseMarkdown.vue'
+
+const { content, loading, error, load } = useMarkdown()
+
+// Load from public folder or API
+load('/content/about.md')
+</script>
+
+<template>
+  <div v-if="loading">Loading...</div>
+  <div v-else-if="error">{{ error }}</div>
+  <BaseMarkdown v-else :content="content" />
+</template>
+```
+
+### Size Variants
+
+```vue
+<BaseMarkdown :content="content" size="sm" />  <!-- Compact -->
+<BaseMarkdown :content="content" size="base" /> <!-- Default -->
+<BaseMarkdown :content="content" size="lg" />  <!-- Article/long-form -->
+```
+
+### Prose Classes (Direct Use)
+
+You can also use prose classes directly on any container:
+
+```vue
+<article class="prose prose-lg">
+  <h1>Title</h1>
+  <p>Content styled with brand colors...</p>
+</article>
+```
+
+### Available Prose Modifiers
+
+| Class | Description |
+|-------|-------------|
+| `prose` | Base prose styles with brand colors |
+| `prose-sm` | Smaller text (sidebars, footnotes) |
+| `prose-base` | Default size |
+| `prose-lg` | Larger text (articles) |
+| `prose-full` | Remove max-width constraint |
+| `prose-narrow` | Narrower max-width (45ch) |
+
+### Brand Integration
+
+All prose elements use brand tokens:
+- Headings: `font-headers`, `color-brand-base`
+- Body: `font-primary`, `color-brand-base`
+- Links: `color-brand-accent`
+- Code: `font-secondary`, `color-brand-secondary`
+- Blockquotes: `border-brand-accent`
+- Code blocks: `bg-brand-base`, `color-brand-neutral`
 
 ## Do NOT
 
