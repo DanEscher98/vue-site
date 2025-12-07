@@ -1,6 +1,6 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "include": ["env.d.ts", "src/**/*.ts", "src/**/*.vue"],
+  "include": ["src/env.d.ts", "src/**/*.ts", "src/**/*.vue"],
   "compilerOptions": {
     /* === Output === */
     "target": "ESNext",
@@ -32,7 +32,7 @@
 
   /* === Vue Compiler Options (for vue-language-server) === */
   "vueCompilerOptions": {
-    "target": 3.3,
+    "target": 3.5,
     "strictTemplates": true,
     "strictVModel": true,
     "strictCssModules": true,

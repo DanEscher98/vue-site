@@ -1,9 +1,9 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 
-defineProps({
-  msg: String,
-})
+defineProps<{
+  msg: string
+}>()
 
 const count = ref(0)
 </script>
@@ -15,8 +15,8 @@ const count = ref(0)
     <div class="card">
       <button
         type="button"
-        @click="count++"
         class="rounded bg-blue-600 px-4 py-2 font-medium text-white transition hover:bg-blue-700"
+        @click="count++"
       >
         count is {{ count }}
       </button>

@@ -1,81 +1,55 @@
-// eslint.config.js
-import { fileURLToPath } from 'url'
-import { dirname, join } from 'path'
-import typescriptEslint from '@typescript-eslint/eslint-plugin'
-import typescriptParser from '@typescript-eslint/parser'
+import pluginVue from 'eslint-plugin-vue'
+import vueTsEslintConfig from '@vue/eslint-config-typescript'
+import prettierConfig from '@vue/eslint-config-prettier'
 import unusedImports from 'eslint-plugin-unused-imports'
-import importPlugin from 'eslint-plugin-import'
-import vue from 'eslint-plugin-vue'
-import vueParser from 'vue-eslint-parser'
-import prettier from 'eslint-plugin-prettier'
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
 
 export default [
-  // =========================
-  // TypeScript files
-  // =========================
+  // Vue recommended rules (includes parser setup)
+  ...pluginVue.configs['flat/recommended'],
+
+  // TypeScript support for Vue
+  ...vueTsEslintConfig(),
+
+  // Prettier integration
+  prettierConfig,
+
+  // Custom rules for all files
   {
-    files: ['**/*.{ts,tsx}'],
-    languageOptions: {
-      parser: typescriptParser,
-      parserOptions: {
-        project: [join(__dirname, 'tsconfig.json'), join(__dirname, 'tsconfig.node.json')],
-        tsconfigRootDir: __dirname,
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-      },
-    },
     plugins: {
-      '@typescript-eslint': typescriptEslint,
       'unused-imports': unusedImports,
-      import: importPlugin,
-      prettier: prettier,
     },
     rules: {
-      '@typescript-eslint/no-unused-vars': 'off',
-      '@typescript-eslint/explicit-function-return-type': 'warn',
+      // Unused imports cleanup
       'unused-imports/no-unused-imports': 'warn',
       'unused-imports/no-unused-vars': [
         'warn',
-        { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' },
-      ],
-      'import/order': [
-        'warn',
         {
-          alphabetize: { order: 'asc', caseInsensitive: true },
-          groups: [['builtin', 'external', 'internal', 'parent', 'sibling', 'index']],
-          'newlines-between': 'always',
+          vars: 'all',
+          varsIgnorePattern: '^_',
+          args: 'after-used',
+          argsIgnorePattern: '^_',
         },
       ],
-      'prettier/prettier': 'warn',
+
+      // Console/debugger warnings in production
       'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
       'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     },
   },
-  // =========================
-  // Vue SFC files
-  // =========================
+
+  // Vue-specific customizations
   {
     files: ['**/*.vue'],
-    languageOptions: {
-      parser: vueParser,
-      parserOptions: {
-        parser: typescriptParser,
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-        extraFileExtensions: ['.vue'],
-      },
-    },
-    plugins: {
-      vue: vue,
-      prettier: prettier,
-    },
     rules: {
+      // Allow multiple template roots (Vue 3 feature)
       'vue/no-multiple-template-root': 'off',
+
+      // Template formatting
       'vue/html-indent': ['warn', 2, { attribute: 1, baseIndent: 1 }],
-      'vue/max-attributes-per-line': ['warn', { singleline: 3, multiline: { max: 1 } }],
+      'vue/max-attributes-per-line': [
+        'warn',
+        { singleline: 3, multiline: { max: 1 } },
+      ],
       'vue/html-self-closing': [
         'warn',
         {
@@ -84,15 +58,33 @@ export default [
           math: 'any',
         },
       ],
-      'prettier/prettier': 'warn',
-      'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-      'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+
+      // Prefer Composition API style
+      'vue/component-api-style': ['warn', ['script-setup', 'composition']],
+
+      // Enforce component naming conventions
+      'vue/component-name-in-template-casing': ['warn', 'PascalCase'],
     },
   },
-  // =========================
-  // Ignore dist and config files
-  // =========================
+
+  // TypeScript-specific rules
   {
-    ignores: ['dist/**', 'config/**', 'vite.config.ts', 'eslint.config.js'],
+    files: ['**/*.ts', '**/*.tsx', '**/*.vue'],
+    rules: {
+      '@typescript-eslint/no-unused-vars': 'off', // Handled by unused-imports
+      '@typescript-eslint/explicit-function-return-type': 'off', // Too strict for Vue templates
+    },
+  },
+
+  // Ignore patterns
+  {
+    ignores: [
+      'dist/**',
+      'dev-dist/**',
+      'node_modules/**',
+      '*.config.js',
+      '*.config.ts',
+      '*.config.mjs',
+    ],
   },
 ]

@@ -1,29 +1,21 @@
-import Unfonts from 'unplugin-fonts/vite'
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import tailwindcss from '@tailwindcss/vite'
 import { VitePWA } from 'vite-plugin-pwa'
-import path from 'path'
+import Unfonts from 'unplugin-fonts/vite'
+import { fileURLToPath, URL } from 'url'
 
-export default ({ mode }) => {
-  // Load environment variables based on the current mode (dev, production, etc.)
+export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
 
-  // Default fallback values if env variables are missing
   const PWA_NAME = env.VITE_PWA_NAME || 'My Vue App'
   const PWA_THEME_COLOR = env.VITE_PWA_THEME_COLOR || '#8F00FF'
   const PWA_ICON_SRC = env.VITE_PWA_ICON_SRC || 'pwa-512x512.png'
 
-  return defineConfig({
-    build: {
-      outDir: 'dist', // default, but make sure it's explicit
-    },
-    resolve: {
-      alias: {
-        '@': '/src',
-      },
-    },
+  return {
     plugins: [
       vue(),
+      tailwindcss(),
       Unfonts({
         google: {
           families: [
@@ -40,15 +32,17 @@ export default ({ mode }) => {
         workbox: {
           clientsClaim: true,
           skipWaiting: true,
-          globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+          globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
         },
         devOptions: {
           enabled: true,
         },
-        includeAssets: [],
         manifest: {
           name: PWA_NAME,
+          short_name: PWA_NAME,
           theme_color: PWA_THEME_COLOR,
+          background_color: '#ffffff',
+          display: 'standalone',
           icons: [
             {
               src: PWA_ICON_SRC,
@@ -66,5 +60,20 @@ export default ({ mode }) => {
         },
       }),
     ],
-  })
-}
+    resolve: {
+      alias: {
+        '@': fileURLToPath(new URL('./src', import.meta.url)),
+      },
+    },
+    build: {
+      outDir: 'dist',
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vue: ['vue', 'vue-router', 'pinia'],
+          },
+        },
+      },
+    },
+  }
+})
